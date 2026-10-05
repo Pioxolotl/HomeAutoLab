@@ -1,0 +1,7 @@
+# Przykładowy stack na przykładowym (wyłączonym) hoście. Pokazuje układ, nie jest wdrażany.
+services:
+  whoami:
+    image: traefik/whoami:v1.10
+    restart: unless-stopped
+    ports:
+      - "192.168.0.10:8081:80"

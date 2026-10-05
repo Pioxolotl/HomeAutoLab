@@ -1,0 +1,14 @@
+# Instalacja (jednorazowo): .venv\Scripts\python.exe -m pip install pre-commit && .venv\Scripts\pre-commit.exe install
+# Pierwszy commit buduje gitleaks (pre-commit sam pobiera toolchain Go, kilka minut).
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+  - repo: local
+    hooks:
+      - id: sops-encrypted
+        name: pliki w hosts/*/secrets/ muszą być zaszyfrowane sops
+        entry: python tools/check_sops_encrypted.py
+        language: python
+        files: ^hosts/.*/secrets/.*\.(ya?ml|json)$

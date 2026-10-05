@@ -1,0 +1,19 @@
+# Połączenie
+ssh_host: homelab-nas     # alias z ~/.ssh/config -> 192.168.50.100:22100
+ssh_user: pioxolotl
+ssh_port: 22100
+sudo: false               # DSM: sudo pyta o hasło, więc pyinfra nie używa go domyślnie.
+                          # Pełne fakty: collect_facts.py homelab-nas --sudo (hasło wpisuje użytkownik)
+temp_dir: /var/services/homes/pioxolotl   # DSM: /tmp jest noexec, a sudo musi uruchomić askpass pyinfra
+
+# Opis
+owner: me
+managed: observe
+role: "Synology NAS (DSM): zdjęcia, pliki, backupy, kilka usług w Container Manager; 32 GB RAM, 24/7"
+groups: [synology, docker]
+
+# Stacki docker compose (deploys/compose_stacks.py)
+stacks_dir: /volume1/docker                                            # hosts/homelab-nas/services/<stack> -> tutaj/<stack>
+docker_sudo: true                                                      # compose up przez sudo (Docker wymaga roota); pyinfra zapyta o hasło
+files_sudo: false                                                      # /volume1/docker jest zapisywalny dla użytkownika SSH (ACL udziału)
+compose_bin: /var/packages/ContainerManager/target/usr/bin/docker-compose   # DSM: compose v2 jako osobna binarka

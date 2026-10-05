@@ -1,0 +1,14 @@
+# Opcjonalne nadpisania dla deploys/compose_stacks.py. Plik może nie istnieć - wtedy działają
+# domyślne z host.yaml (stacks_dir, docker_sudo, compose_bin). Skopiuj tylko, gdy czegoś potrzebujesz.
+
+# remote_dir: /volume1/docker/<stack>   # domyślnie <stacks_dir>/<nazwa katalogu stacka>
+# sudo: true                            # compose up przez sudo; domyślnie docker_sudo z host.yaml
+# files_sudo: false                     # kopiowanie plików przez sudo; domyślnie files_sudo z host.yaml (False)
+# compose_bin: docker compose           # domyślnie compose_bin z host.yaml
+
+# Dodatkowe pliki z katalogu stacka kopiowane obok compose.yaml (configi montowane do kontenerów).
+# Zmiana któregokolwiek wywołuje `compose up`.
+# files:
+#   - src: config.yml
+#     dest: data/config.yml
+#     mode: "644"

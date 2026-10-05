@@ -1,0 +1,710 @@
+system:
+  hostname: nas
+  os: Linux
+  distribution:
+    name: null
+    major: null
+    minor: null
+    pretty_name: null
+    id: null
+    id_like: null
+    version_id: null
+  kernel: 4.4.302+
+  arch: x86_64
+  uptime_seconds: 77580
+  timezone: Europe/Sarajevo
+  load_average:
+    '1': 0.07
+    '5': 0.02
+    '15': 0.0
+  reboot_required: false
+hardware:
+  cpus: null
+  memory_mb: null
+  block_devices:
+    /dev/md0:
+      blocks: '8191352'
+      used: '1490688'
+      available: '6581880'
+      used_percent: '19'
+      mount: /
+    /dev/mapper/cachedev_0:
+      blocks: '3739641448'
+      used: '995280772'
+      available: '2744360676'
+      used_percent: '27'
+      mount: /volume1/
+    /dev/mapper/cachedev_1:
+      blocks: '1864284244'
+      used: '1355990616'
+      available: '508293628'
+      used_percent: '73'
+      mount: /volume1/
+    /dev/loop0:
+      blocks: '27633'
+      used: '767'
+      available: '24573'
+      used_percent: '4'
+      mount: /tmp/SynologyAuthService
+  gpu: []
+  cpu_fallback:
+  - '4'
+  - "model name\t: AMD Ryzen Embedded R1600"
+  memory_fallback:
+  - 'MemTotal:       32841944 kB'
+  - 'MemAvailable:   28536936 kB'
+  - 'SwapTotal:      21802932 kB'
+network:
+  ipv4:
+    lo:
+    - 127.0.0.1
+    eth0:
+    - 192.168.50.100
+    eth1:
+    - 169.254.208.205
+    docker0:
+    - 172.17.0.1
+  devices:
+  - eth0
+  - eth1
+  - sit0@NONE
+  tailscale_ip: []
+  listening_ports:
+  - 'tcp        0      0 0.0.0.0:5357            0.0.0.0:*               LISTEN      13570/nginx: master'
+  - 'tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      13570/nginx: master'
+  - 'tcp        0      0 0.0.0.0:22100           0.0.0.0:*               LISTEN      9882/sshd: /usr/bin'
+  - tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      20395/postgres
+  - tcp        0      0 127.0.0.1:33304         0.0.0.0:*               LISTEN      16341/synomibaction
+  - 'tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      13570/nginx: master'
+  - tcp        0      0 0.0.0.0:445             0.0.0.0:*               LISTEN      13232/smbd
+  - tcp        0      0 127.0.0.1:512           0.0.0.0:*               LISTEN      7145/termd
+  - tcp        0      0 127.0.0.1:161           0.0.0.0:*               LISTEN      15686/snmpd
+  - tcp        0      0 0.0.0.0:6690            0.0.0.0:*               LISTEN      24909/syncd
+  - 'tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      13570/nginx: master'
+  - 'tcp        0      0 0.0.0.0:5001            0.0.0.0:*               LISTEN      13570/nginx: master'
+  - tcp        0      0 0.0.0.0:139             0.0.0.0:*               LISTEN      13232/smbd
+  - 'tcp6       0      0 :::5357                 :::*                    LISTEN      13570/nginx: master'
+  - 'tcp6       0      0 :::80                   :::*                    LISTEN      13570/nginx: master'
+  - 'tcp6       0      0 :::22100                :::*                    LISTEN      9882/sshd: /usr/bin'
+  - 'tcp6       0      0 :::443                  :::*                    LISTEN      13570/nginx: master'
+  - tcp6       0      0 :::3261                 :::*                    LISTEN      -
+  - tcp6       0      0 :::445                  :::*                    LISTEN      13232/smbd
+  - tcp6       0      0 :::5566                 :::*                    LISTEN      26180/synobtrfsrepl
+  - tcp6       0      0 :::3263                 :::*                    LISTEN      -
+  - tcp6       0      0 :::3264                 :::*                    LISTEN      -
+  - tcp6       0      0 :::3265                 :::*                    LISTEN      16928/scsi_plugin_s
+  - tcp6       0      0 :::6690                 :::*                    LISTEN      24909/syncd
+  - 'tcp6       0      0 :::5000                 :::*                    LISTEN      13570/nginx: master'
+  - 'tcp6       0      0 :::5001                 :::*                    LISTEN      13570/nginx: master'
+  - tcp6       0      0 :::139                  :::*                    LISTEN      13232/smbd
+  - udp        0      0 0.0.0.0:3702            0.0.0.0:*                           10845/synowsdiscove
+  - 'udp        0      0 0.0.0.0:5353            0.0.0.0:*                           19079/avahi-daemon:'
+  - 'udp        0      0 0.0.0.0:39862           0.0.0.0:*                           19079/avahi-daemon:'
+  - udp        0      0 0.0.0.0:56689           0.0.0.0:*                           16701/synorelayd
+  - udp        0      0 0.0.0.0:9997            0.0.0.0:*                           9869/findhostd
+  - udp        0      0 0.0.0.0:9998            0.0.0.0:*                           9869/findhostd
+  - udp        0      0 0.0.0.0:9999            0.0.0.0:*                           9869/findhostd
+  - udp        0      0 0.0.0.0:68              0.0.0.0:*                           9728/dhclient
+  - udp        0      0 0.0.0.0:123             0.0.0.0:*                           10495/chronyd
+  - udp        0      0 192.168.50.255:137      0.0.0.0:*                           10533/nmbd
+  - udp        0      0 192.168.50.100:137      0.0.0.0:*                           10533/nmbd
+  - udp        0      0 0.0.0.0:137             0.0.0.0:*                           10533/nmbd
+  - udp        0      0 192.168.50.255:138      0.0.0.0:*                           10533/nmbd
+  - udp        0      0 192.168.50.100:138      0.0.0.0:*                           10533/nmbd
+  - udp        0      0 0.0.0.0:138             0.0.0.0:*                           10533/nmbd
+  - udp        0      0 127.0.0.1:161           0.0.0.0:*                           15686/snmpd
+  - udp        0      0 127.0.0.1:323           0.0.0.0:*                           10495/chronyd
+  - udp        0      0 0.0.0.0:1900            0.0.0.0:*                           13801/minissdpd
+  - udp6       0      0 :::3702                 :::*                                10845/synowsdiscove
+  - 'udp6       0      0 :::5353                 :::*                                19079/avahi-daemon:'
+  - 'udp6       0      0 :::41349                :::*                                19079/avahi-daemon:'
+  - udp6       0      0 :::123                  :::*                                10495/chronyd
+  - udp6       0      0 ::1:323                 :::*                                10495/chronyd
+storage:
+  mounts:
+    /:
+      device: /dev/md0
+      type: ext4
+    /volume2:
+      device: /dev/mapper/cachedev_0
+      type: btrfs
+    /volume1:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+    /tmp/SynologyAuthService:
+      device: /dev/loop0
+      type: ext4
+    /volume1/@docker:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+    /volume1/@docker/btrfs:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+    /volume1/@appdata/ContainerManager/all_shares/backups:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+    /volume1/@appdata/ContainerManager/all_shares/data:
+      device: /dev/mapper/cachedev_0
+      type: btrfs
+    /volume1/@appdata/ContainerManager/all_shares/docker:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+    /volume1/@appdata/ContainerManager/all_shares/homes:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+    /volume1/@appdata/ContainerManager/all_shares/shared:
+      device: /dev/mapper/cachedev_1
+      type: btrfs
+  disk_usage:
+  - Filesystem             Type   Size  Used Avail Use% Mounted on
+  - /dev/md0               ext4   7.9G  1.5G  6.3G  19% /
+  - /dev/mapper/cachedev_0 btrfs  3.5T  950G  2.6T  27% /volume2
+  - /dev/mapper/cachedev_1 btrfs  1.8T  1.3T  485G  73% /volume1
+  - /dev/loop0             ext4    27M  767K   24M   4% /tmp/SynologyAuthService
+  - /dev/mapper/cachedev_1 btrfs  1.8T  1.3T  485G  73% /volume1/@appdata/ContainerManager/all_shares/backups
+  - /dev/mapper/cachedev_0 btrfs  3.5T  950G  2.6T  27% /volume1/@appdata/ContainerManager/all_shares/data
+  - /dev/mapper/cachedev_1 btrfs  1.8T  1.3T  485G  73% /volume1/@appdata/ContainerManager/all_shares/docker
+  - /dev/mapper/cachedev_1 btrfs  1.8T  1.3T  485G  73% /volume1/@appdata/ContainerManager/all_shares/homes
+  - /dev/mapper/cachedev_1 btrfs  1.8T  1.3T  485G  73% /volume1/@appdata/ContainerManager/all_shares/shared
+binaries:
+  nginx: /usr/bin/nginx
+  psql: /usr/bin/psql
+  postgres: /usr/bin/postgres
+  redis-server: /usr/bin/redis-server
+  git: /usr/bin/git
+  python3: /usr/bin/python3
+  docker: /var/packages/ContainerManager/target/usr/bin/docker
+services:
+  systemd_enabled_or_running:
+  - RCPower.service
+  - SmartDbCopy.service
+  - SynoDisableFanCheck.service
+  - SynoHddUtil.service
+  - SynoInitEth.service
+  - SynoLedBrightness.service
+  - SynoMemCheck.service
+  - SynoSwInitLed.service
+  - WDidle3Dis.service
+  - accountdb-cache.service
+  - apparmor.service
+  - arp-ignore.service
+  - avahi.service
+  - bypass-traverse.service
+  - chronyd.service
+  - clean-session.service
+  - configupdate-rootfs.service
+  - configupdate-share.service
+  - configupdate-volume.service
+  - crond.service
+  - dbus-session.service
+  - dbus-system.service
+  - dhclient@eth1.service
+  - dhcp-init.service
+  - esynoscheduler-bootup.service
+  - fandebug.service
+  - findhostd.service
+  - get-machine-key.service
+  - hotplugd.service
+  - ip-conflict-detect.service
+  - irqbalance.service
+  - nginx.service
+  - pgsql-adapter.service
+  - pgsql.service
+  - pkg-ContainerManager-dockerd.service
+  - pkg-ContainerManager-event-watcherd.service
+  - pkg-ContainerManager-termd.service
+  - pkg-FileStation-thumbd.service
+  - pkg-ReplicationService-synobtrfsreplicad.service
+  - pkg-StorageAnalyzer-GenerateGlobalData.service
+  - pkg-SynoFinder-fileindexd.service
+  - pkg-SynoFinder-synoelasticd.service
+  - pkg-SynologyApplicationService-VapidSendServer.service
+  - pkg-SynologyApplicationService-notification_send.service
+  - pkg-SynologyApplicationService-pgbouncer.service
+  - pkg-SynologyPhotos-apid.service
+  - pkg-SynologyPhotos-bg-jobd.service
+  - pkg-SynologyPhotos-check-album.service
+  - pkg-SynologyPhotos-check-center.service
+  - pkg-SynologyPhotos-concept-detection.service
+  - pkg-SynologyPhotos-face-extraction.service
+  - pkg-SynologyPhotos-geocoding.service
+  - pkg-SynologyPhotos-js-server.service
+  - pkg-SynologyPhotos-notify-center.service
+  - pkg-SynologyPhotos-person-clustering.service
+  - pkg-SynologyPhotos-pgbouncer.service
+  - pkg-SynologyPhotos-preview-regenerator.service
+  - pkg-SynologyPhotos-task-center.service
+  - pkg-SynologyPhotos-thumb.service
+  - pkg-SynologyPhotos-thumbnail-provider.service
+  - pkg-auto-repair.service
+  - pkg-builtin-resource-clearer.service
+  - pkg-feasibility-config-update.service
+  - pkg-install-high-priority-builtin.service
+  - pkg-install-low-priority-builtin.service
+  - pkg-invoked.service
+  - pkg-iscsi.service
+  - pkg-rclocal.service
+  - pkg-ready.service
+  - pkg-root-always-reconfigure.service
+  - pkg-root-onupgrade-reconfigure.service
+  - pkg-scsi-plugin-server.service
+  - pkg-scsit-monitor.service
+  - pkg-support-service-online-updater.service
+  - pkg-support-service-remote-action-client.service
+  - pkg-synoha-bootup-update-package.service
+  - pkg-synologydrive-apid.service
+  - pkg-synologydrive-authd.service
+  - pkg-synologydrive-clientd.service
+  - pkg-synologydrive-redis.service
+  - pkg-synologydrive-syncd.service
+  - pkg-synologydrive-vmtouchd.service
+  - pkg-synologydrive-workerd.service
+  - pkg-synorelay-boot-state.service
+  - pkg-synorelay-register-region.service
+  - pkg-synorelayd-reload-fixed-package-config.service
+  - pkg-synorelayd-reload-package-config.service
+  - pkg-synorelayd.service
+  - pkg-synosamba-env-setup.service
+  - pkg-synosamba-nmbd.service
+  - pkg-synosamba-smbd.service
+  - pkg-synosamba-wsdiscoveryd.service
+  - pkg-synosamba-wstransfer-genconf.service
+  - pkg-synosamba-wstransferd.service
+  - pkg-synowebrtc.service
+  - pkgctl-ActiveInsight.service
+  - pkgctl-CodecPack.service
+  - pkgctl-ContainerManager.service
+  - pkgctl-FileStation.service
+  - pkgctl-Git.service
+  - pkgctl-HybridShare.service
+  - pkgctl-Node.js_v18.service
+  - pkgctl-Node.js_v20.service
+  - pkgctl-Node.js_v22.service
+  - pkgctl-OAuthService.service
+  - pkgctl-Python2.service
+  - pkgctl-QuickConnect.service
+  - pkgctl-ReplicationService.service
+  - pkgctl-SMBService.service
+  - pkgctl-ScsiTarget.service
+  - pkgctl-SecureSignIn.service
+  - pkgctl-SnapshotReplication.service
+  - pkgctl-StorageAnalyzer.service
+  - pkgctl-StorageManager.service
+  - pkgctl-SupportService.service
+  - pkgctl-SynoAnalytics.service
+  - pkgctl-SynoFinder.service
+  - pkgctl-SynoOnlinePack_v2.service
+  - pkgctl-SynologyApplicationService.service
+  - pkgctl-SynologyDrive.service
+  - pkgctl-SynologyPhotos.service
+  - pkgctl-UniversalViewer.service
+  - pkgctl-python314.service
+  - pkgctl-synocli-file.service
+  - policy-route-init.service
+  - pppoe.service
+  - rc-network.service
+  - rdgz-check.service
+  - recyclebind.service
+  - s2s_daemon.service
+  - scemd.service
+  - securityscan.service
+  - selfcheck_bootHealth.service
+  - send-upgrade-vault-notify.service
+  - serial-getty@ttyS0.service
+  - snmpd.service
+  - ssdp.service
+  - sshd.service
+  - syno-HyperBackup-ED-spk-backup.service
+  - syno-availability-udc.service
+  - syno-before-upgrade-ready.service
+  - syno-boot-seq-set-rootfs-ready.service
+  - syno-boot-seq-tmp-bootseq.service
+  - syno-building-tasks-restore.service
+  - syno-cgi-keygen.service
+  - syno-check-disk-compatibility.service
+  - syno-check-locale.service
+  - syno-check-normal-shutdown.service
+  - syno-check-service-home.service
+  - syno-coredump-store.service
+  - syno-customized-configure.service
+  - syno-disk-health-db.service
+  - syno-dump-bootup-log.service
+  - syno-ew-info.service
+  - syno-fan-modules-load.service
+  - syno-hostname.service
+  - syno-initrd-umount.service
+  - syno-installation-id.service
+  - syno-kernel-modules-load.service
+  - syno-kernel-timezone.service
+  - syno-local-auth-rebuild.service
+  - syno-log-boot-done.service
+  - syno-log-boot-start.service
+  - syno-log-boot-time.service
+  - syno-log-package-boot-time.service
+  - syno-login.service
+  - syno-md-ntb-module-insert.service
+  - syno-md-resync-speed-adjust@active.service
+  - syno-mem-single-channel.service
+  - syno-mkdhparam.service
+  - syno-mount-efivarfs.service
+  - syno-mount-usbfs.service
+  - syno-network-check.service
+  - syno-nic-supported-check.service
+  - syno-notify-bundle-drive-update.service
+  - syno-notify-drop-log-tree.service
+  - syno-notify-idle-drive.service
+  - syno-notify-slow-drive.service
+  - syno-notify-unsupport-drive.service
+  - syno-platform-dump.service
+  - syno-poweroff-task.service
+  - syno-quota-migrate.service
+  - syno-rbd-system-vol-check.service
+  - syno-rclocal.service
+  - syno-rolling-group-id.service
+  - syno-service-tmp.service
+  - syno-set-eunitseq.service
+  - syno-set-noatime.service
+  - syno-set-project-var-log.service
+  - syno-sharesnapshot-check.service
+  - syno-space.service
+  - syno-ssd-cache-bootup-missing-check.service
+  - syno-storage-task-resume.service
+  - syno-swap.service
+  - syno-switch-check.service
+  - syno-sync-all-scheduler-and-disks.service
+  - syno-sysctl-conf.service
+  - syno-sysctl-kernel-sem.service
+  - syno-sysctl-kernel-shmmni.service
+  - syno-sysctl-kswapd-threads.service
+  - syno-sysctl-watermarks.service
+  - syno-tls-profile.service
+  - syno-volume-fsck-check.service
+  - syno-volume-fsck.service
+  - syno-volume-posthook.service
+  - syno-volume.service
+  - syno-vspace-phase2.service
+  - syno-vspace.service
+  - syno_adjust_serialize_policy.service
+  - syno_bios_boot_perf.service
+  - syno_bios_log_collect.service
+  - syno_btrfs_quick_balance.service
+  - syno_bundle_firmware_upgrade.service
+  - syno_bundle_firmware_upgrade_notify.service
+  - syno_disk_latency_monitor.service
+  - syno_disk_latency_record_writeback.service
+  - syno_nvme_power_limit_set.service
+  - syno_pstore_collect.service
+  - syno_ssd_bundle_bootup.service
+  - syno_update_disk_logs.service
+  - synobackupd.service
+  - synobtrfssnap_deleted_subvol_clean.service
+  - synobtrfssnap_snapcount_sync.service
+  - synobtrfssnapusage_clean_undone_task.service
+  - synocacheadvisord-boot-check.service
+  - synocached.service
+  - synocachepinfiled.service
+  - synocgid.service
+  - synocheckgroup.service
+  - synocheckhotspare-disk-compat.service
+  - synocheckhotspare.service
+  - synocheckinfo.service
+  - synocheckshare.service
+  - synocheckuser.service
+  - synoconfd.service
+  - synocontentextract-gen-enable-file.service
+  - synocontentextractd.service
+  - synocrond.service
+  - synodbud_autoupdate.service
+  - synodbud_lock_init.service
+  - synodrnode.service
+  - synodsmnotifyqueue.service
+  - synoindex-checkpackage.service
+  - synoindex-mediad.service
+  - synoindex-mediaserverdb.service
+  - synoindex-notifyd.service
+  - synoindex-plugind.service
+  - synoindex-scand.service
+  - synoindex-synoindexdb.service
+  - synoindex-workerd.service
+  - synoindexd.service
+  - synolicensed.service
+  - synolog-linker.service
+  - synologand.service
+  - synologrotated.service
+  - synomkflvd.service
+  - synomkthumbd.service
+  - synomount.service
+  - synonetd-wait-online.service
+  - synonetd.service
+  - synoneteventd.service
+  - synoplugind.service
+  - synoscgi-socket.service
+  - synoscgi.service
+  - synoscheduled-vmtouch.service
+  - synoscheduled.service
+  - synoscheduler-init.service
+  - synosharesnapshot_meta_sync.service
+  - synosharesnaptree_reconstruct.service
+  - synosmpkgd.service
+  - synosnmpcd.service
+  - synostoraged.service
+  - synosupportchannelcheck.service
+  - synosysnotify.service
+  - synosysnotifymigration.service
+  - synotaskmgr.service
+  - synotc.service
+  - synotifyd.service
+  - synotokenmgr.service
+  - synotune.service
+  - synounlinkd.service
+  - synovpnclient.service
+  - syslog-acc.service
+  - syslog-ng.service
+  - syslog-notify.service
+  - systemd-journal-flush.service
+  - systemd-journald.service
+  - systemd-logind.service
+  - systemd-modules-load.service
+  - systemd-sysctl.service
+  - systemd-tmpfiles-setup.service
+  - systemd-udev-trigger.service
+  - systemd-udevd.service
+  - taskmanager.service
+  - unbindUSB.service
+  - update-dir-preference.service
+  - ups-clean-config.service
+  - user-preference.service
+  running:
+  - avahi.service                                            loaded active running Avahi daemon
+  - chronyd.service                                          loaded active running NTP client/server
+  - crond.service                                            loaded active running Periodic Command Scheduler
+  - dbus-session.service                                     loaded active running D-Bus Session Message Bus
+  - dbus-system.service                                      loaded active running D-Bus System Message Bus
+  - dhclient@eth1.service                                    loaded active running eth1 DHCP Client
+  - findhostd.service                                        loaded active running findhost daemon
+  - hotplugd.service                                         loaded active running daemon for handle hotplug event
+  - ip-conflict-detect.service                               loaded active running Set IP Conflict Detect
+  - irqbalance.service                                       loaded active running Service for irq balance
+  - nginx.service                                            loaded active running Nginx
+  - pgsql.service                                            loaded active running PostgreSQL database server
+  - pkg-ContainerManager-dockerd.service                     loaded active running Docker Application Container Engine
+  - pkg-ContainerManager-event-watcherd.service              loaded active running Docker event watch service
+  - pkg-ContainerManager-termd.service                       loaded active running Daemon for container terminal session
+  - pkg-FileStation-thumbd.service                           loaded active running "FileStation Thumbnail Daemon"
+  - pkg-invoked.service                                      loaded active running Login Invoke Daemon
+  - pkg-ReplicationService-synobtrfsreplicad.service         loaded active running Replication Service Daemon
+  - pkg-scsi-plugin-server.service                           loaded active running Synology Storage Console Server
+  - pkg-scsit-monitor.service                                loaded active running SCSI Target Monitor
+  - pkg-support-service-online-updater.service               loaded active running Support Service Online Updater
+  - pkg-support-service-remote-action-client.service         loaded active running Support Service Remote Action Client
+  - pkg-SynoFinder-fileindexd.service                        loaded active running pkg-SynoFinder-fileindexd
+  - pkg-SynoFinder-synoelasticd.service                      loaded active running pkg-SynoFinder-synoelasticd
+  - pkg-SynologyApplicationService-notification_send.service loaded active running Synology Application Service notification
+    send daemon
+  - pkg-SynologyApplicationService-pgbouncer.service         loaded active running Synology Application Service pgbouncer
+  - pkg-SynologyApplicationService-VapidSendServer.service   loaded active running Synology Application Service vapid send
+    daemon
+  - pkg-synologydrive-apid.service                           loaded active running Synology Drive apid
+  - pkg-synologydrive-authd.service                          loaded active running Synology Drive authd
+  - pkg-synologydrive-clientd.service                        loaded active running Synology Drive clientd
+  - pkg-synologydrive-redis.service                          loaded active running Synology Drive redis
+  - pkg-synologydrive-syncd.service                          loaded active running Synology Drive syncd
+  - pkg-synologydrive-vmtouchd.service                       loaded active running Synology Drive vmtouchd
+  - pkg-synologydrive-workerd.service                        loaded active running Synology Drive workerd
+  - pkg-SynologyPhotos-apid.service                          loaded active running SynologyPhotos apid
+  - pkg-SynologyPhotos-bg-jobd.service                       loaded active running SynologyPhotos Background Jobs
+  - pkg-SynologyPhotos-check-album.service                   loaded active running SynologyPhotos Check Album Service
+  - pkg-SynologyPhotos-check-center.service                  loaded active running SynologyPhotos User Check
+  - pkg-SynologyPhotos-concept-detection.service             loaded active running SynologyPhotos concept-detection
+  - pkg-SynologyPhotos-face-extraction.service               loaded active running SynologyPhotos face-extraction
+  - pkg-SynologyPhotos-geocoding.service                     loaded active running SynologyPhotos Geocoding
+  - pkg-SynologyPhotos-js-server.service                     loaded active running SynologyPhotos JS Server
+  - pkg-SynologyPhotos-notify-center.service                 loaded active running "SynologyPhotos Synotify Daemon"
+  - pkg-SynologyPhotos-person-clustering.service             loaded active running SynologyPhotos person-clustering
+  - pkg-SynologyPhotos-pgbouncer.service                     loaded active running SynologyPhotos PgBouncer
+  - pkg-SynologyPhotos-preview-regenerator.service           loaded active running SynologyPhotos Preview Regenerator
+  - pkg-SynologyPhotos-task-center.service                   loaded active running "SynologyPhotos Task center"
+  - pkg-SynologyPhotos-thumb.service                         loaded active running SynologyPhotos Thumb
+  - pkg-SynologyPhotos-thumbnail-provider.service            loaded active running SynologyPhotos Thumbnail Provider
+  - pkg-synorelayd.service                                   loaded active running synorelay daemon
+  - pkg-synosamba-nmbd.service                               loaded active running NetBIOS name server
+  - pkg-synosamba-smbd.service                               loaded active running Samba SMB Daemon
+  - pkg-synosamba-wsdiscoveryd.service                       loaded active running WS-Discovery Server
+  - pkg-synosamba-wstransferd.service                        loaded active running WS-Transfer Server
+  - pkg-synowebrtc.service                                   loaded active running Synology WebRTC
+  - recyclebind.service                                      loaded active running Daemon for Recycle Bin
+  - s2s_daemon.service                                       loaded active running Shared Folder Sync Daemon
+  - scemd.service                                            loaded active running daemon for monitor HW/system status
+  - serial-getty@ttyS0.service                               loaded active running Serial Getty on ttyS0
+  - snmpd.service                                            loaded active running SNMP Daemon
+  - ssdp.service                                             loaded active running SSDP service
+  - sshd.service                                             loaded active running OpenBSD Secure Shell server
+  - syno-availability-udc.service                            loaded active running Availability monitor for UDC
+  - syno_disk_latency_monitor.service                        loaded active running Synology daemon for monitoring disk latency.
+  - synobackupd.service                                      loaded active running synobackup daemon
+  - synocached.service                                       loaded active running Redis data structure server for webapi
+  - synocachepinfiled.service                                loaded active running SSD Cache Pin File Daemon
+  - synocgid.service                                         loaded active running Synology CGI Auth Daemon
+  - synoconfd.service                                        loaded active running synoconfd daemon
+  - synocontentextractd.service                              loaded active running synoce daemon
+  - synocrond.service                                        loaded active running Synology Cron Daemon
+  - synoindex-mediad.service                                 loaded active running synoindex mediad
+  - synoindex-notifyd.service                                loaded active running synoindex notifyd
+  - synoindex-plugind.service                                loaded active running synoindex plugind
+  - synoindex-scand.service                                  loaded active running synoindex scand
+  - synoindex-workerd.service                                loaded active running synoindex workerd
+  - synoindexd.service                                       loaded active running synoindexd
+  - synolicensed.service                                     loaded active running Synology License Service Provider
+  - synologand.service                                       loaded active running daemon for monitor logs and generate alert
+  - synologrotated.service                                   loaded active running Log Rotate Daemon
+  - synomkflvd.service                                       loaded active running synomkflvd
+  - synomkthumbd.service                                     loaded active running synomkthumbd
+  - synonetd.service                                         loaded active running Synology Network Daemon
+  - synoneteventd.service                                    loaded active running Synology Network Event Daemon
+  - synoplugind.service                                      loaded active running Synology Plugin Daemon
+  - synoscgi-socket.service                                  loaded active running Synology SCGI SocketIO
+  - synoscgi.service                                         loaded active running Synology SCGI
+  - synoscheduled-vmtouch.service                            loaded active running Synology Task Scheduler Vmtouch
+  - synoscheduled.service                                    loaded active running Synology Schedule Daemon
+  - synosmpkgd.service                                       loaded active running Synology daemon for monitoring smpkg
+  - synosnmpcd.service                                       loaded active running Daemon for Resource Monitor
+  - synostoraged.service                                     loaded active running Synology daemon for monitoring space/disk/cache
+    status
+  - synotaskmgr.service                                      loaded active running Synology task manager
+  - synotifyd.service                                        loaded active running synotifyd
+  - synotokenmgr.service                                     loaded active running Synology token manager
+  - synounlinkd.service                                      loaded active running Daemon for synounlinkd
+  - syslog-acc.service                                       loaded active running Synology log accounting service
+  - syslog-ng.service                                        loaded active running System Logger Daemon
+  - systemd-journald.service                                 loaded active running Journal Service
+  - systemd-logind.service                                   loaded active running Login Service
+  - systemd-udevd.service                                    loaded active running udev Kernel Device Manager
+  failed:
+  - pkg-SynoAnalytics-analyzer.service loaded failed failed SynoAnalytics Analyzer
+  timers:
+  - n/a  n/a  Sun 2026-10-04 22:22:29 CEST  21h ago pkg-SynologyPhotos-geocoding-refetch-migration.timer pkg-SynologyPhotos-geocoding-refetch-migration.service
+  - n/a  n/a  n/a                           n/a     pkg-SynologyPhotos-migrate-thumbnail-version.timer   pkg-SynologyPhotos-migrate-thumbnail-version.service
+  user_crontab: []
+  cron_d:
+  - synosched.spacereclaim.task.task
+  - synosched.synovolumeanalyze.task.task
+users:
+  admin:
+    home: /var/services/homes/admin
+    shell: /bin/sh
+    groups:
+    - administrators
+  pioxolotl:
+    home: /var/services/homes/pioxolotl
+    shell: /bin/sh
+    groups:
+    - administrators
+  root:
+    home: /root
+    shell: /bin/ash
+    groups:
+    - daemon
+    - log
+updates:
+  apt_upgradable:
+  - '0'
+docker:
+  containers: []
+  compose_projects:
+  - '[]'
+  volumes: []
+  networks:
+  - bridge bridge
+  - host host
+  - none null
+  socket:
+  - srw-rw---- 1 root root 0 Oct  4 22:55 /var/run/docker.sock
+web:
+  nginx_sites:
+  - '/etc/nginx/conf.d:'
+  - dsm.pkg-static.ContainerManager-70163528.conf
+  - dsm.pkg-static.OAuthService-476980394.conf
+  - dsm.pkg-static.StorageAnalyzer-223933883.conf
+  - dsm.pkg-static.SynologyApplicationService-1255611987.conf
+  - dsm.pkg-static.SynologyDrive-1350404196.conf
+  - dsm.ssdp.conf
+  - dsm.syno-app-portal.FileStation.conf
+  - dsm.syno-app-portal.SynologyDrive.conf
+  - dsm.syno-app-portal.SynologyPhotos.conf
+  - dsm.synorelayd.conf
+  - http.pkg-static.OAuthService-4095906076.conf
+  - http.pkg-static.SynologyPhotos-3993972375.conf
+  - ssl.compress.conf
+  - '/etc/nginx/sites-enabled:'
+  - server.ReverseProxy.conf
+  - synowstransfer-nginx.conf
+  caddyfile:
+  - 'no'
+  nginx_reverse_proxy:
+  - 'bytes: 1'
+platform:
+  synology_dsm:
+  - majorversion="7"
+  - minorversion="4"
+  - major="7"
+  - minor="4"
+  - micro="1"
+  - buildphase="GM"
+  - buildnumber="90080"
+  - smallfixnumber="0"
+  - nano="0"
+  - base="90080"
+  - productversion="7.4.1"
+  - os_name="DSM"
+  - builddate="2026/07/22"
+  - buildtime="01:54:19"
+  synology_packages:
+  - Node.js_v18
+  - Git
+  - ScsiTarget
+  - SynologyApplicationService
+  - QuickConnect
+  - ContainerManager
+  - StorageAnalyzer
+  - OAuthService
+  - SMBService
+  - HybridShare
+  - SynoOnlinePack_v2
+  - ReplicationService
+  - SynoFinder
+  - SupportService
+  - Node.js_v20
+  - Node.js_v22
+  - SynologyPhotos
+  - Python2
+  - CodecPack
+  - SecureSignIn
+  - synocli-file
+  - SynoAnalytics
+  - UniversalViewer
+  - FileStation
+  - StorageManager
+  - python314
+  - SynologyDrive
+  - SnapshotReplication
+  - ActiveInsight
+  synology_shares:
+  - '/volume1:'
+  - _old
+  - backups
+  - docker
+  - homes
+  - shared
+  - '/volume2:'
+  - data
+  synology_timezone:
+  - timezone="Sarajevo"
+  synology_admin_account:
+  - 'User Name   : [admin]'
+  - 'Expired     : [true]'
+_meta:
+  collected_at: '2026-10-05T17:52:54+00:00'
+  pyinfra_version: 3.10.0
+  sudo_used: true
+  errors: {}
+  target: homelab-nas

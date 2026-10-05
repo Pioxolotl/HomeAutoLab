@@ -1,0 +1,21 @@
+# Przykład. Skopiuj katalog, zmień nazwę i dane, albo poproś Claude: "dodaj hosta ..."
+# Połączenie
+ssh_host: nas-vm          # alias z ~/.ssh/config albo nazwa MagicDNS w Tailscale
+ssh_user: deploy
+# ssh_port: 22
+sudo: true                # tylko jeśli użytkownik ma sudo bez hasła
+# temp_dir: /home/deploy  # gdy /tmp na hoście jest noexec (Synology DSM) - pyinfra trzyma tam askpass
+
+# Opis
+owner: me                 # me | brother
+managed: observe          # observe = tylko odczyt; managed = pyinfra może zmieniać
+role: "VM na Synology: CORI, runner CI, LiteLLM"
+groups: [family, docker]
+
+# Stacki docker compose (deploys/compose_stacks.py); pominięte = /opt, bez sudo, `docker compose`
+stacks_dir: /opt
+docker_sudo: false
+# files_sudo: false
+# compose_bin: docker compose
+
+disabled: true            # usuń tę linię, gdy host będzie prawdziwy

@@ -1,0 +1,13 @@
+# Kto może odszyfrować które pliki. Klucze PUBLICZNE age (age1...), prywatne nigdy tutaj.
+#   ty       - Twój osobisty klucz (kopia w menedżerze haseł + na papierze)
+#   deployer - klucz runnera/VM, który wdraża; dodaj, gdy powstanie, tylko do reguł jego hostów
+# Po zmianie odbiorców: sops updatekeys hosts/<host>/secrets/<plik>.sops.yaml
+creation_rules:
+  # przykład reguły per host (deployer widzi tylko swoją maszynę):
+  # - path_regex: hosts/nas-vm/secrets/.*\.sops\.yaml$
+  #   age: >-
+  #     age1TWOJ_KLUCZ_PUBLICZNY,
+  #     age1KLUCZ_DEPLOYERA_NAS_VM
+  - path_regex: hosts/.*/secrets/.*\.sops\.yaml$
+    age: >-
+      age1yychkjwn5azs00cuj50pjymlalhch5y36lvu6s3wjqvfvrznlf3sc57sag

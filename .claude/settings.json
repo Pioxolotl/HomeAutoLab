@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(python tools/collect_facts.py *)",
+      "Bash(.venv/Scripts/python.exe tools/collect_facts.py *)",
+      "Bash(pyinfra inventory.py debug-inventory)",
+      "Bash(.venv/Scripts/pyinfra.exe inventory.py debug-inventory)",
+      "Bash(.venv/Scripts/pyinfra.exe inventory.py deploys/* --dry*)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)"
+    ],
+    "deny": [
+      "Bash(sops -d *)",
+      "Bash(sops --decrypt *)",
+      "Bash(sops decrypt *)",
+      "Bash(sops exec-env *)",
+      "Bash(sops exec-file *)",
+      "Bash(pyinfra * -y *)",
+      "Bash(pyinfra * --yes *)",
+      "Bash(git push *)",
+      "Read(~/.config/sops/age/**)",
+      "Read(~/AppData/Roaming/sops/age/**)",
+      "Read(~/.ssh/id_*)",
+      "Read(~/.ssh/homelab_*)",
+      "Read(./**/.env)"
+    ]
+  }
+}
