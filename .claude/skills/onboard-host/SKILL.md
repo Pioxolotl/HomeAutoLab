@@ -50,6 +50,10 @@ rzeczywistość, dopiero potem (skillami `adopt-service` / `new-service`) przeno
      którego sudo musi uruchomić. Objaw: `--sudo` pyta o hasło w kółko mimo poprawnego
      hasła. Rozwiązanie: `temp_dir: /var/services/homes/<user>` w host.yaml (sprawdź
      `mount | grep -E " /tmp | /volume1 "` - katalog docelowy nie może mieć `noexec`).
+   - Synology DSM: SFTP pokazuje udziały jako `/docker`, `/homes`, `/home` zamiast `/volume1/...`
+     (sprawdź: `printf 'ls /
+' | sftp -b - <alias>`). pyinfra domyślnie wgrywa pliki przez SFTP
+     i dostaje "No such file". Rozwiązanie: `ssh_file_transfer_protocol: scp` w host.yaml.
 
 3. **Utwórz `hosts/<nazwa>/host.yaml`** według wzoru z `hosts/example-nas-vm/host.yaml`
    (bez linii `disabled`). `managed: observe`. `sudo: true` tylko wtedy, gdy użytkownik

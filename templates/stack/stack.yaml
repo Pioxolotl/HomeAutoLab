@@ -12,3 +12,10 @@
 #   - src: config.yml
 #     dest: data/config.yml
 #     mode: "644"
+
+# Klucze z hosts/<host>/secrets/<stack>.sops.yaml zapisywane jako osobne pliki zamiast do .env
+# (np. plik użytkowników z hashem hasła). Pozostałe klucze trafiają do .env.
+# secret_files:
+#   - key: USERS_YML
+#     dest: data/users.yml
+#     mode: "600"

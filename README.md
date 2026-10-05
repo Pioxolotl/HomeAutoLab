@@ -69,7 +69,7 @@ Sprawdzenie: `ssh -o BatchMode=yes <alias> true` musi przejść bez pytania o ha
 
 ```powershell
 winget install --id FiloSottile.age -e
-winget install --id Mozilla.SOPS -e
+winget install --id SecretsOPerationS.SOPS -e
 ```
 
 Nowy terminal, potem klucz:
@@ -89,10 +89,19 @@ odszyfrowują automatycznie. Kto ma plik, ten ma dostęp, dlatego pilnujemy plik
 Dla automatu (runner CI) dochodzi drugi klucz "deployer", dopisany jako kolejny odbiorca
 w `.sops.yaml`, z regułą tylko dla jego hosta.
 
-Test:
+`sops <plik>` otwiera edytor z `SOPS_EDITOR`/`EDITOR`; na Windows nie ma domyślnego, więc ustaw
+go raz na stałe (VS Code z `--wait`, bo sops czeka na zamknięcie karty):
 
 ```powershell
-sops hosts\example-nas-vm\secrets\test.sops.yaml
+[Environment]::SetEnvironmentVariable("SOPS_EDITOR", "code --wait", "User")
+```
+
+Sekrety stacków twórz i edytuj skryptem, który zakłada katalog `hosts/<host>/secrets/`
+(sops sam go nie tworzy), dobiera edytor, gdy `SOPS_EDITOR` nie jest ustawiony, i podaje sops
+ścieżkę pasującą do `.sops.yaml`. Test w nowym terminalu:
+
+```powershell
+.venv\Scripts\python.exe tools\edit_secret.py example-nas-vm test
 ```
 
 Otworzy się edytor; wpisz `hello: world`, zapisz. Plik na dysku ma być zaszyfrowany
@@ -142,7 +151,7 @@ Host w `observe` jest przez deploy pomijany; `--data adopt_check=true` pozwala n
 ## Sekrety
 
 ```powershell
-sops hosts\<host>\secrets\<stack>.sops.yaml     # tworzy/edytuje w edytorze, zapisuje zaszyfrowane
+.venv\Scripts\python.exe tools\edit_secret.py <host> <stack>   # tworzy/edytuje, zapisuje zaszyfrowane
 ```
 
 Deploy robi z tego plik `.env` w katalogu stacka (`KEY=value`, mode 600). W repo lądują wyłącznie

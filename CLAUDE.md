@@ -25,7 +25,7 @@ adresów ani decyzji. To, co dotyczy maszyny, pisz w `hosts/<host>/`.
    żeby nie uruchamiać `sops -d`. Wdrożenia (bez --dry) uruchamia człowiek.
 3. Nigdy nie odszyfrowujesz sekretów (`sops -d`, `sops exec-*`) i nie czytasz kluczy age ani SSH
    (także `%APPDATA%\sops\age\`). Operujesz na nazwach sekretów, wartości wpisuje użytkownik
-   w `sops <plik>`. Hasła sudo nie znasz: przebiegi wymagające sudo uruchamia użytkownik.
+   przez `python tools/edit_secret.py <host> <stack>` (tego skryptu nie uruchamiasz). Hasła sudo nie znasz: przebiegi wymagające sudo uruchamia użytkownik.
 4. Nowe hosty mają `managed: observe`. Zmiana na `managed` tylko na wyraźne polecenie.
 5. Serwery klientów nie należą do tego repo - mają osobne repo i osobne klucze.
 6. Przed commitem sprawdź diff pod kątem sekretów (hasła, tokeny, klucze, prywatne URL-e
@@ -57,5 +57,6 @@ Microsoft Store). Używaj `.venv/Scripts/python.exe` i `.venv/Scripts/pyinfra.ex
 Docker i compose poza PATH: `/var/packages/ContainerManager/target/usr/bin/{docker,docker-compose}`
 (compose v2 jako osobna binarka, nie wtyczka) - w host.yaml `compose_bin`, `docker_sudo: true`,
 `stacks_dir: /volume1/docker`. Docker wymaga roota, sudo pyta o hasło. `/tmp` jest `noexec`,
-stąd `temp_dir` w host.yaml. Kontenery z CLI widać w GUI Container Manager, ale nie jako "projekt";
+stąd `temp_dir` w host.yaml. SFTP na DSM pokazuje wirtualny widok udziałów (`/docker` zamiast
+`/volume1/docker`), więc pyinfra wgrywa pliki przez `ssh_file_transfer_protocol: scp`. Kontenery z CLI widać w GUI Container Manager, ale nie jako "projekt";
 nie klikać w nich w GUI. Szczegóły w skillach onboard-host i new-service.

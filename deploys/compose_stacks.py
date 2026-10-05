@@ -9,7 +9,10 @@ Co robi dla każdego stacka:
   1. katalog <remote_dir> (domyślnie <stacks_dir z host.yaml>/<stack>)
   2. compose.yaml 1:1 z repo
   3. dodatkowe pliki z `files:` w stack.yaml (configi montowane do kontenerów)
-  4. .env z hosts/<host>/secrets/<stack>.sops.yaml (sops -d lokalnie; mode 600)
+  4. sekrety z hosts/<host>/secrets/<stack>.sops.yaml (sops -d lokalnie):
+     - klucze wymienione w stack.yaml `secret_files:` lądują jako osobne pliki (mode 600),
+       np. users.yml z hashem hasła,
+     - pozostałe klucze trafiają do .env (KEY=value, mode 600)
   5. `<compose_bin> up -d --remove-orphans` tylko, gdy coś z 2-4 się zmieniło
 
 Uruchamianie (z katalogu repo):
@@ -68,10 +71,14 @@ def _stack_config(stack_dir: Path) -> dict:
     return yaml.safe_load(cfg_file.read_text(encoding="utf-8")) or {}
 
 
-def _env_from_sops(secrets_file: Path) -> str:
-    """Odszyfrowuje lokalnie (klucz age użytkownika) i buduje treść .env: KEY=value, alfabetycznie."""
+def _decrypt_sops(secrets_file: Path) -> dict:
+    """Odszyfrowuje lokalnie (klucz age użytkownika). Wartości nie logować."""
     raw = subprocess.check_output(["sops", "-d", "--output-type", "json", str(secrets_file)])
-    data = json.loads(raw)
+    return json.loads(raw)
+
+
+def _env_text(data: dict) -> str:
+    """Treść .env: KEY=value, alfabetycznie. Wartości wieloliniowe nie nadają się do .env."""
     return "".join(f"{key}={value}\n" for key, value in sorted(data.items()))
 
 
@@ -111,20 +118,41 @@ def deploy_stack(stack_dir: Path) -> None:
         ))
 
     secrets_file = SECRETS_DIR / f"{stack}.sops.yaml"
+    secret_files = cfg.get("secret_files", [])   # [{key: USERS_YML, dest: data/users.yml, mode: "600"}]
     if secrets_file.exists():
         if _truthy(host.data.get("no_secrets")):
+            targets = ", ".join([sf["dest"] for sf in secret_files] + [".env (jeśli zostaną inne klucze)"])
             logger.warning(
-                f"{stack}: pomijam .env (no_secrets=true); wdrożenie zbuduje go z "
+                f"{stack}: pomijam sekrety (no_secrets=true); wdrożenie zapisze {targets} z "
                 f"{secrets_file.relative_to(REPO).as_posix()}"
             )
         else:
-            changed_ops.append(files.put(
-                name=f"{stack}: .env z sops",
-                src=StringIO(_env_from_sops(secrets_file)),
-                dest=f"{remote_dir}/.env",
-                mode="600",
-                _sudo=files_sudo,
-            ))
+            data = _decrypt_sops(secrets_file)
+            for sf in secret_files:
+                if sf["key"] not in data:
+                    raise ValueError(f"{stack}: w {secrets_file.name} brak klucza {sf['key']} dla pliku {sf['dest']}")
+                changed_ops.append(files.put(
+                    name=f"{stack}: {sf['dest']} z sops",
+                    src=StringIO(str(data.pop(sf["key"]))),
+                    dest=f"{remote_dir}/{sf['dest']}",
+                    mode=str(sf.get("mode", "600")),
+                    _sudo=files_sudo,
+                ))
+            if data:
+                changed_ops.append(files.put(
+                    name=f"{stack}: .env z sops",
+                    src=StringIO(_env_text(data)),
+                    dest=f"{remote_dir}/.env",
+                    mode="600",
+                    _sudo=files_sudo,
+                ))
+    elif secret_files:
+        msg = f"{stack}: stack.yaml wymienia secret_files, ale nie ma {secrets_file.relative_to(REPO).as_posix()}"
+        if _truthy(host.data.get("no_secrets")):
+            logger.warning(msg + " (podgląd bez sekretów - ok)")
+        else:
+            # bez pliku sekretów stack wstałby bez users.yml/.env i działał źle - lepiej przerwać
+            raise FileNotFoundError(msg + " - utwórz go: sops " + secrets_file.relative_to(REPO).as_posix())
 
     server.shell(
         name=f"{stack}: compose up",

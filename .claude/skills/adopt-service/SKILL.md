@@ -52,8 +52,8 @@ tylko, jeśli coś wcześniej się zmieni", więc przy zerze w Change nic nie zo
 
 5. **Sekrety.** Jeśli usługa używa `.env` lub zmiennych z hasłami:
    - wypisz użytkownikowi nazwy zmiennych,
-   - poproś, by sam utworzył plik poleceniem `sops hosts/<host>/secrets/<stack>.sops.yaml`,
-     wpisując te same klucze i wartości co w obecnym `.env`,
+   - poproś, by sam utworzył plik poleceniem `python tools/edit_secret.py <host> <stack>`
+     (zakłada katalog `secrets/`, dobiera edytor), wpisując te same klucze i wartości co w obecnym `.env`,
    - deploy zbuduje z niego `.env` (kolejność alfabetyczna, format `KEY=value`, mode 600).
      Jeśli obecny `.env` ma inny format (komentarze, inna kolejność), --dry pokaże różnicę
      w `.env`; to jest akceptowalne, ale nazwij to wprost i zapytaj użytkownika.

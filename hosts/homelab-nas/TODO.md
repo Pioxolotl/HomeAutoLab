@@ -5,6 +5,10 @@ Odhacza użytkownik; Claude dopisuje i uzgadnia z faktami. Sprawy repo i narzęd
 
 ## Do zrobienia
 
+- [ ] **Ograniczyć dostęp do udziału `docker` do admina.** Panel sterowania → Udostępniony folder →
+  `docker` → Edytuj → Uprawnienia: tylko `pioxolotl` (odczyt/zapis), reszta brak dostępu; rozważyć
+  ukrycie udziału w Moje miejsca sieciowe. Powód: pliki tworzone przez kontenery dziedziczą ACL
+  `rwxrwxrwx` (np. `dozzle/data/session_secret`), a w katalogach stacków lądują `.env` i sekrety.
 - [ ] **Zamknąć SSH NAS-a od strony internetu.** Router przekierowuje 22100 → 192.168.50.100, a sshd
   przyjmuje hasła. Docelowo: usunąć regułę "Ssh" z routera i wchodzić przez WireGuard na routerze
   (51820). Decyzja 2026-10-04: **zostaje tymczasowo**, do czasu ogarnięcia dostępu zdalnego.

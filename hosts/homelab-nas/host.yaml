@@ -5,10 +5,11 @@ ssh_port: 22100
 sudo: false               # DSM: sudo pyta o hasło, więc pyinfra nie używa go domyślnie.
                           # Pełne fakty: collect_facts.py homelab-nas --sudo (hasło wpisuje użytkownik)
 temp_dir: /var/services/homes/pioxolotl   # DSM: /tmp jest noexec, a sudo musi uruchomić askpass pyinfra
+ssh_file_transfer_protocol: scp           # DSM: SFTP pokazuje udziały jako /docker, /homes (bez /volume1), więc pliki idą przez scp
 
 # Opis
 owner: me
-managed: observe
+managed: managed
 role: "Synology NAS (DSM): zdjęcia, pliki, backupy, kilka usług w Container Manager; 32 GB RAM, 24/7"
 groups: [synology, docker]
 

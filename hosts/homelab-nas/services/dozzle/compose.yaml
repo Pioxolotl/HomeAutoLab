@@ -1,0 +1,48 @@
+# Dozzle: podgląd logów kontenerów Dockera na homelab-nas. Docker API wyłącznie przez socket-proxy
+# (tylko odczyt, wybrane endpointy); Dozzle nie widzi /var/run/docker.sock.
+# Opis, decyzje i instrukcje: README.md obok. Zmiany tylko przez repo + deploys/compose_stacks.py.
+services:
+  socket-proxy:
+    image: tecnativa/docker-socket-proxy:v0.5.0
+    restart: unless-stopped
+    environment:
+      CONTAINERS: 1      # GET /containers/* (lista, inspect, logi) - tego używa Dozzle
+      EVENTS: 1          # strumień zdarzeń (start/stop kontenerów)
+      INFO: 1            # /info - nazwa hosta, liczba kontenerów
+      VERSION: 1         # /version
+      PING: 1            # /_ping
+      POST: 0            # żadnych zmian przez API (brak start/stop/exec)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - internal
+    # celowo BEZ `ports`: proxy jest widoczne tylko dla kontenerów w sieci internal
+
+  dozzle:
+    image: amir20/dozzle:v11.3.0
+    restart: unless-stopped
+    depends_on:
+      - socket-proxy
+    environment:
+      DOZZLE_REMOTE_HOST: tcp://socket-proxy:2375|homelab-nas   # po "|" nazwa hosta widoczna w UI
+      DOZZLE_AUTH_PROVIDER: simple                              # logowanie z data/users.yml
+      DOZZLE_AUTH_TTL: 48h
+      DOZZLE_NO_ANALYTICS: "true"
+      # Sprawdzanie aktualizacji obrazów wymaga endpointów /images i /distribution, których proxy
+      # celowo nie przepuszcza (kończyło się 403). Wersje zmieniamy w repo, więc funkcja zbędna.
+      DOZZLE_IMAGE_CHECK_MODE: "off"
+    volumes:
+      - ./data:/data           # users.yml (z sops, zarządza deploy) + profile użytkowników (zapisuje Dozzle)
+    ports:
+      - "192.168.50.100:8080:8080"   # tylko adres LAN NAS-a, nie 0.0.0.0
+    healthcheck:
+      test: ["CMD", "/dozzle", "healthcheck"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    networks:
+      - internal
+
+networks:
+  internal: {}

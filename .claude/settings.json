@@ -17,6 +17,8 @@
       "Bash(sops decrypt *)",
       "Bash(sops exec-env *)",
       "Bash(sops exec-file *)",
+      "Bash(*tools/edit_secret.py*)",
+      "Bash(*tools\\edit_secret.py*)",
       "Bash(pyinfra * -y *)",
       "Bash(pyinfra * --yes *)",
       "Bash(git push *)",

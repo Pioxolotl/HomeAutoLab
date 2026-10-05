@@ -1,6 +1,6 @@
 # homelab-nas
 
-Zadania tej maszyny: [TODO.md](TODO.md). Stacki: `services/<stack>/` (dziś brak).
+Zadania tej maszyny: [TODO.md](TODO.md). Stacki z repo: [dozzle](services/dozzle/README.md).
 
 **Rola:** Synology DS923+ (DSM 7.3.2): zdjęcia (Synology Photos), pliki (Drive, SMB), backupy
 i miejsce na kilka usług w Container Manager. Włączony 24/7, mały pobór prądu.
@@ -35,8 +35,12 @@ projektów compose, zero wolumenów, tylko domyślne sieci bridge/host/none (spr
 - `synobackupd` - systemowy demon backupu DSM
 - **Hyper Backup nie jest zainstalowany**; backupu poza NAS nie ma (potwierdzone, patrz TODO)
 
+**Stacki z repo (`services/<stack>/`, wdraża `deploys/compose_stacks.py` do `/volume1/docker/<stack>`)**
+- [dozzle](services/dozzle/README.md) - podgląd logów kontenerów, `192.168.50.100:8080`, Docker API
+  przez socket-proxy (tylko odczyt). **Działa od 2026-10-05.**
+
 **Platforma i dostęp**
-- Container Manager (dockerd, event-watcher, termd) - Docker, obecnie zero kontenerów
+- Container Manager (dockerd, event-watcher, termd) - Docker; kontenery tylko ze stacków z repo
 - ~~Tailscale~~ - **odinstalowany 2026-10-04** (był nieużywany). Razem z nim zniknął interfejs
   `tun1000`, który tworzył `tailscaled`, oraz porty UDP 41641 i TCP 32906
 - QuickConnect + synorelayd - zdalny dostęp przez relay Synology; używany celowo (telefony)
@@ -57,6 +61,8 @@ projektów compose, zero wolumenów, tylko domyślne sieci bridge/host/none (spr
 | eth0 | 192.168.50.100 (statyczny) | LAN, główny |
 | eth1 | 169.254.208.205 | link-local, kernel zgłasza `linkdown` - kabel niepodpięty (potwierdzone) |
 | docker0 | 172.17.0.1 | mostek Dockera |
+
+Porty stacków z repo: 8080 na 192.168.50.100 (dozzle; nasłuchuje - sprawdzone 2026-10-05).
 
 Porty nasłuchujące na `0.0.0.0` (wszystkie interfejsy, stan z sudo 2026-10-04 23:56): 22100 (SSH),
 80/443 (nginx DSM), 5000/5001 (DSM), 445/139 (SMB), 6690 (Drive), 5357 (WS-Discovery),

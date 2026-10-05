@@ -41,6 +41,8 @@ README jest wypełnione, a użytkownik wie, co ma zrobić ręcznie.
    - porty: `IP_LAN:port:port` albo `127.0.0.1:port:port` (gdy przed usługą będzie reverse proxy);
      nigdy sam `port:port`, bo to 0.0.0.0;
    - dane w `./data` (bind mount w katalogu stacka) - łatwiej backupować niż nazwane wolumeny;
+     nie montuj `:ro`, jeśli dokumentacja aplikacji nie mówi wprost, że tam nie pisze
+     (Dozzle pisze profile do `/data`, choć users.yml tylko czyta);
    - Docker API tylko przez **socket-proxy** (wzorzec niżej), nigdy goły `/var/run/docker.sock`
      w kontenerze aplikacji;
    - sekrety przez `env_file: .env` (deploy generuje `.env` z sops) albo plik montowany z `mode 600`
@@ -50,9 +52,12 @@ README jest wypełnione, a użytkownik wie, co ma zrobić ręcznie.
    (**wypełnij wszystkie sekcje**, także "Dla domowników" i "Dane i backup"; brak backupu wpisz
    wprost i dodaj do `hosts/<host>/TODO.md`), `stack.yaml` tylko gdy coś nadpisujesz.
 
-5. **Sekrety:** wypisz użytkownikowi nazwy kluczy i polecenie
-   `sops hosts/<host>/secrets/<stack>.sops.yaml`. Jeśli `.sops.yaml` w repo ma jeszcze placeholder
-   klucza age, zatrzymaj się: najpierw środowisko (README repo, sekcja "Start").
+5. **Sekrety:** wypisz użytkownikowi nazwy kluczy, gotowy wzór YAML do wklejenia i polecenie
+   `python tools/edit_secret.py <host> <stack>` (zakłada `hosts/<host>/secrets/`, dobiera edytor,
+   odpala sops). Nie każ zakładać katalogu ręcznie i nie podawaj gołego `sops <ścieżka>`.
+   Tego skryptu nie uruchamiasz sam: pokazuje odszyfrowaną treść. Jeśli `.sops.yaml` ma jeszcze
+   placeholder klucza age, zatrzymaj się: najpierw środowisko (README repo, sekcja "Start").
+   Gdy sekret to cały plik (np. users.yml z hashem), dodaj go do `secret_files:` w stack.yaml.
 
 6. **Sprawdź:**
    `pyinfra inventory.py deploys/compose_stacks.py --limit <host> --dry --data no_secrets=true --data only=<stack>`
@@ -63,7 +68,11 @@ README jest wypełnione, a użytkownik wie, co ma zrobić ręcznie.
 7. **Dopisz stack do `hosts/<host>/README.md`** ("Co tu działa" z linkiem do README stacka, port
    w "Sieć", dane w "Dane i backup").
 
-8. **Przekaż użytkownikowi** listę kroków ręcznych w kolejności: sops, `managed`, wdrożenie, reguła
+8. **Po pierwszym wdrożeniu poproś o logi** obu kontenerów z pierwszych minut (Dozzle albo
+   `docker logs`) i przejrzyj je pod kątem `error`, `403`, `read-only`. Poprawki z logów opisz
+   w "Historia i decyzje" i "Troubleshooting" README stacka.
+
+9. **Przekaż użytkownikowi** listę kroków ręcznych w kolejności: sops, `managed`, wdrożenie, reguła
    reverse proxy w GUI (jeśli jest), test. Po wdrożeniu poproś o `collect_facts.py <host> --sudo`
    (jeśli host tego wymaga) i uzupełnij README stacka o "działa od <data>". Commit:
    `stack(<host>/<stack>): add`.
@@ -74,7 +83,8 @@ README jest wypełnione, a użytkownik wie, co ma zrobić ręcznie.
   `/var/packages/ContainerManager/target/usr/bin/docker-compose` (v2). Nie ma wtyczki `docker compose`.
   W host.yaml: `compose_bin`, `docker_sudo: true`, `stacks_dir: /volume1/docker`.
 - Wszystko z Dockerem wymaga roota; pyinfra zapyta użytkownika o hasło. `/tmp` jest `noexec`,
-  więc host.yaml musi mieć `temp_dir`.
+  więc host.yaml musi mieć `temp_dir`. SFTP ma wirtualny widok udziałów, więc host.yaml musi mieć
+  `ssh_file_transfer_protocol: scp` (inaczej `files.put` kończy się "No such file").
 - Kontenery z CLI compose są widoczne w GUI Container Manager jako kontenery, ale nie jako
   "projekt". Nie klikać w nich w GUI - zmiany poszłyby obok repo.
 
@@ -107,6 +117,14 @@ networks:
 ```
 Uzasadnienie do README: kontener z gołym socketem to root na hoście; proxy ogranicza API
 do odczytu i wybranych endpointów.
+
+Gdy aplikacja w logach zgłasza `403 Forbidden ... Request forbidden by administrative rules`,
+woła endpoint zablokowany w proxy. Kolejność: (1) sprawdź w dokumentacji aplikacji, czy tę
+funkcję da się wyłączyć zmienną środowiskową (np. Dozzle: `DOZZLE_IMAGE_CHECK_MODE: off`),
+(2) dopiero jeśli funkcja jest potrzebna, otwórz w proxy konkretny endpoint tylko do odczytu
+(`IMAGES=1`, `DISTRIBUTION=1`...), nigdy `POST=1`. Decyzję opisz w README stacka.
+Przed pierwszym wdrożeniem przejrzyj listę zmiennych aplikacji pod kątem funkcji, które
+potrzebują dodatkowych endpointów (sprawdzanie aktualizacji, akcje, shell), i wyłącz zbędne.
 
 ## Dokumentacja - lista kontrolna przed "gotowe"
 

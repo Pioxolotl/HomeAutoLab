@@ -1,0 +1,9 @@
+# Nadpisania dla deploys/compose_stacks.py. Reszta (remote_dir, sudo, compose_bin) z host.yaml:
+# /volume1/docker/dozzle, compose up przez sudo, pliki bez sudo.
+
+# Plik użytkowników Dozzle z hashem bcrypt hasła - trzymany w sops, nie jawnie w repo.
+# Klucz USERS_YML w hosts/homelab-nas/secrets/dozzle.sops.yaml zawiera całą treść users.yml.
+secret_files:
+  - key: USERS_YML
+    dest: data/users.yml
+    mode: "600"

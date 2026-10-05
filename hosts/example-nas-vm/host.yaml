@@ -5,6 +5,7 @@ ssh_user: deploy
 # ssh_port: 22
 sudo: true                # tylko jeśli użytkownik ma sudo bez hasła
 # temp_dir: /home/deploy  # gdy /tmp na hoście jest noexec (Synology DSM) - pyinfra trzyma tam askpass
+# ssh_file_transfer_protocol: scp   # Synology DSM: SFTP ma wirtualny widok udziałów (/docker zamiast /volume1/docker)
 
 # Opis
 owner: me                 # me | brother
